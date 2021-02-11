@@ -54,7 +54,7 @@ const fetchISSFlyOverTimes = function(coord, callback) {
       return;
     }
 
-    const times= JSON.parse(body)['response']
+    const times = JSON.parse(body)['response'];
     return callback(null, times);
   });
 };
@@ -62,23 +62,23 @@ const fetchISSFlyOverTimes = function(coord, callback) {
 const nextISSTimesForMyLocation = function(callback) {
   fetchMyIP((error,ip) => {
     if (error) {
-      console.log("It didn't work!", error)
-      return
+      console.log("It didn't work!", error);
+      return;
     }
     fetchCoordsByIP(ip, (error, coord) => {
       if (error) {
-        console.log("It didn't work!", error)
-        return
+        console.log("It didn't work!", error);
+        return;
       }
       fetchISSFlyOverTimes(coord, (error, times) => {
         if (error) {
-          console.log("It didn't work!", error)
-          return 
+          console.log("It didn't work!", error);
+          return;
         }
-        return callback(error, times)
-      })
-    })
-  })
-}
+        return callback(error, times);
+      });
+    });
+  });
+};
 
 module.exports = { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes, nextISSTimesForMyLocation};
